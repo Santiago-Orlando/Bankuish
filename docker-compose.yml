@@ -1,0 +1,62 @@
+version: "3.8"
+services:
+
+  bankuish:
+    build: ./
+    ports:
+      - 3001:3001
+    environment:
+      HOST: DATABASE_URL
+      DB_PORT: 5432
+      USER: postgres
+      PASSWORD: your_password
+      DB_NAME: Bankuish
+      PORT: 3001
+    depends_on:
+      - database
+    networks:
+      Bankuish_net:
+        aliases:
+          - BANKUISH_URL
+
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: your_password
+      POSTGRES_DB: Bankuish
+    volumes:
+      - data:/var/lib/postgresql/data
+      - ./api/config/tables.sql:/docker-entrypoint-initdb.d/create_table.sql
+    networks:
+      Bankuish_net:
+        aliases:
+          - DATABASE_URL
+
+  test_database:
+    image: postgres
+    restart: always
+    ports:
+      - 3002:5432
+    environment:
+      POSTGRES_PASSWORD: your_password
+      POSTGRES_DB: test
+    volumes:
+      - test:/var/lib/postgresql/data
+      - ./api/config/tables.sql:/docker-entrypoint-initdb.d/create_table.sql
+    networks:
+      Bankuish_net:
+        aliases:
+          - TEST_DATABASE_URL
+
+
+networks:
+  Bankuish_net:
+    name: Bankuish_net
+    driver: bridge
+    ipam:
+      driver: default
+
+volumes:
+  data:
+  test:
