@@ -124,10 +124,9 @@ CAUTION:
 
 To perform the End-To-End test needs a valid token, I tried really hard to find a way to get a firebase token but I don't find any way to log in from the backend.
 
-Trying to solve that I made a super simple react app that let you log in and log into the console the firebase token. So before running the e2e test load the app in the "Token Getter" login with these credentials:
 
-        email: seorlando33@gmail.com
-        password: 12345678
+Trying to solve that I made a super simple react app that shows a valid token. So before running the e2e test load the app in the "Token Getter".
+
 
 To load the app in the "Token Getter" folder run:
 
@@ -145,6 +144,7 @@ Also if you are in a system with bash run in the root of the project:
 ```
 If you have no access to bash, please replace manually the __HOST__ and __DB_NAME__ variables values inside the docker-compose.yml file with __TEST_DATABASE_URL__ and __test__.
 
-Open the console ( Ctrl + Shift + i ) copy the token into the first variable in the ./e2e/fakeData.js and then run in the "npm i" and "npm test" command.
+Copy the token into the first variable in the ./e2e/fakeData.js and then run in the "npm i" and "npm test" command.
+
 
 I would have liked to give a valid token but only last 1 hour.
