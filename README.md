@@ -1,21 +1,21 @@
 To run the project:
 ```
-- docker-compose build
-- docker-compose up
+docker-compose build
+docker-compose up
 ```
 To run the unit tests:
 ```
-- docker-compose build
-- docker-compose up
-- go test ./test
+docker-compose build
+docker-compose up
+go test ./test
 ```
 To run the End-To-End test:     // Please read the CAUTION at the bottom!
 ```
-- docker-compose build
-- docker-compose up
-- cd e2e
-- npm install
-- npm test
+docker-compose build
+docker-compose up
+cd e2e
+npm install
+npm test
 ```
 
 
@@ -104,44 +104,47 @@ API Endpoints description:
 
 Things I would have done if I had more time:
 
-    Add validations in the register, for example, check that the email is valid and the password is at least 8 characters long.
+    -Add validations in the register, for example, check that the email is valid and the password is at least 8 characters long.
 
-    With a table of the courses in the database, I could have made a validation when the user tried to inscribe in a course like if the course does not exist in the database send a 401 status code.
+    -With a table of the courses in the database, I could have made a validation when the user tried to inscribe in a course like if the course does not exist in the database send a 401 status code.
 
-    Refactor the course ordered function to admit multiple courses with the same order, to let the user decide which course wants to take.
+    -Refactor the course ordered function to admit multiple courses with the same order, to let the user decide which course wants to take.
 
-    Document the API using Swagger ( I have made this here: https://github.com/Santiago-Orlando/Guardian/blob/main/proxy/swagger.yaml)
+    -Document the API using Swagger ( I have made this here: https://github.com/Santiago-Orlando/Guardian/blob/main/proxy/swagger.yaml)
 
-    Use ENV Variables in the docker-compose file.
+    -Use ENV Variables in the docker-compose file.
 
-    Do the API with Node.js, I read the blogs that Adrian send to me and the "supertest" library looks pretty cool!
+    -Do the API with Node.js, I read the blogs that Adrian send to me and the "supertest" library looks pretty cool!
 
-    Make more tests.
+    -Make more tests.
 
 
 
 CAUTION:
 
-    To perform the End-To-End test needs a valid token, I tried really hard to find a way to get a firebase token but I don't find any way to log in from the backend.
+To perform the End-To-End test needs a valid token, I tried really hard to find a way to get a firebase token but I don't find any way to log in from the backend.
 
-    Trying to solve that I made a super simple react app that shows a valid token. So before running the e2e test load the app in the "Token Getter".
 
-    To load the app in the "Token Getter" folder run:
+Trying to solve that I made a super simple react app that shows a valid token. So before running the e2e test load the app in the "Token Getter".
 
-                ```bash
-                    cd "Token Getter"
-                    npm i
-                    npm start
-                ```
 
-    Also if you are in a system with bash run in the root of the project:
+To load the app in the "Token Getter" folder run:
 
-                ```
-                    sed -i 's/HOST: DATABASE_URL/HOST: TEST_DATABASE_URL/' docker-compose.yml
-                    sed -i 's/DB_NAME: Bankuish/DB_NAME: test/' docker-compose.yml 
-                ```
-    If you have no access to bash, please replace manually the __HOST__ and __DB_NAME__ variables values inside the docker-compose.yml file with __TEST_DATABASE_URL__ and __test__.
+```bash
+    cd "Token Getter"
+    npm i
+    npm start
+```
 
-    Copy the token into the first variable in the ./e2e/fakeData.js and then run in the "npm i" and "npm test" command.
+Also if you are in a system with bash run in the root of the project:
 
-    I would have liked to give a valid token but only last 1 hour.
+```
+    sed -i 's/HOST: DATABASE_URL/HOST: TEST_DATABASE_URL/' docker-compose.yml
+    sed -i 's/DB_NAME: Bankuish/DB_NAME: test/' docker-compose.yml 
+```
+If you have no access to bash, please replace manually the __HOST__ and __DB_NAME__ variables values inside the docker-compose.yml file with __TEST_DATABASE_URL__ and __test__.
+
+Copy the token into the first variable in the ./e2e/fakeData.js and then run in the "npm i" and "npm test" command.
+
+
+I would have liked to give a valid token but only last 1 hour.
