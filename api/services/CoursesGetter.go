@@ -9,15 +9,8 @@ func CoursesGetter(db *sql.DB, firebaseID string) ( models.CompletedCourses, err
 
 	completedCourses := models.CompletedCourses{}
 
-	queryGetCourses := `
-				SELECT course 
-				
-					FROM 		course_made_by_user
-				
-					inner join 	users					on user_id = firebase_id
-
-					WHERE firebase_id = $1
-				`
+	queryGetCourses := `SELECT course FROM course_made_by_user WHERE user_id = $1`
+	
 	rows, err := db.Query(queryGetCourses, firebaseID)
 	if err != nil {
 		return completedCourses, err
